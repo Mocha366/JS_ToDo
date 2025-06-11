@@ -29,19 +29,27 @@ submit.addEventListener('click', () => {
 
     console.log(item); // 確認してみる
 
+    const tr = document.createElement('tr'); // tr要素を生成
+
+    const keys = ['todo','priority','deadline','done'];
+
+    keys.forEach((key) => {
+        const td = document.createElement('td'); // td要素を生成
+
+        if(key === 'done') {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = item.done;
+            td.appendChild(checkbox);
+        } else{
+            td.textContent = item[key]; // ブラケット記法
+        }
+        tr.appendChild(td); // 生成したtd要素をtr要素に追加
+    });
+    table.append(tr); // trエレメントをtable要素に追加
+
     // フォームをリセット
     todo.value = '';
     priority.value = '普';
     deadline.value = '';
-
-    const tr = document.createElement('tr'); // tr要素を生成
-
-    // オブジェクトの繰り返しはfor-in文
-    for (const prop in item) {
-        const td = document.createElement('td'); // td要素を生成
-        td.textContent = item[prop]; // ブラケット記法
-        tr.appendChild(td); // 生成したtd要素をtr要素に追加
-    }
-
-    table.append(tr); // trエレメントをtable要素に追加
 });

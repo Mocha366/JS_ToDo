@@ -2,14 +2,14 @@
 const table = document.querySelector('table'); //表
 const todo = document.getElementById('todo'); //TODO
 const priority = document.querySelector('select'); //優先度
-const deadline = document.querySelector('imput[type="date"]'); //締め切り
+const deadline = document.querySelector('input[type="date"]'); //締め切り
 const submit = document.getElementById('submit'); //登録ボタン
 
 //TODO登録ボタン
 submit.addEventListener('click', () => {
     const item = {}; //入力値を一時的に格納するオブジェクト
 
-    item.todo = todo.Value;
+    item.todo = todo.value;
     item.priority = priority.value;
     item.deadline = deadline.value;
     item.done = false; // 完了はひとまずBoolean値で設定

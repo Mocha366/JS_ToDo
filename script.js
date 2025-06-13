@@ -79,9 +79,9 @@ submit.addEventListener('click', () => {
     storage.todoList = JSON.stringify(list);
 });
 
-const filterButton = document.createElement('button');
+const filterButton = document.createElement('button'); // ボタン要素を生成
 filterButton.textContent = '優先度（高）で絞り込み';
-filterButton.id = 'priority';
+filterButton.id = 'priority'; // CSSでの装飾用
 const main = document.querySelector('main');
 main.appendChild(filterButton);
 

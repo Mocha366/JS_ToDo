@@ -6,6 +6,16 @@ const priority = document.querySelector('select'); // 優先度
 const deadline = document.querySelector('input[type="date"]'); // 締め切り
 const submit = document.getElementById('submit'); // 登録ボタン
 
+const updateTaskStats = () => {
+    const total = list.length;
+    const done = list.filter(item => item.done).length;
+    const undone = total - done;
+
+    document.getElementById('total-count').textContent = total;
+    document.getElementById('done-count').textContent = done;
+    document.getElementById('undone-count').textContent = undone;
+};
+
 let list = []; // TODOリスト
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const item of list) {
         addItem(item);
     }
+
+    updateTaskStats();
 });
 
 const addItem = (item) => {
@@ -46,6 +58,8 @@ const addItem = (item) => {
     });
     table.append(tr); // trエレメントをtable要素に追加
 }
+
+updateTaskStats();
 
 const checkBoxListener = (ev) => {
     // 1-1. テーブル全tr
@@ -100,6 +114,7 @@ submit.addEventListener('click', () => {
     deadline.value = '';
 
     addItem(item);
+    updateTaskStats();
 
     list.push(item);
     storage.todoList = JSON.stringify(list);
@@ -113,6 +128,7 @@ main.appendChild(filterButton);
 
 filterButton.addEventListener('click', () => {
     clearTable();
+    updateTaskStats();
 
     for (const item of list) {
         if(item.priority == '高') {
@@ -142,4 +158,5 @@ remove.addEventListener('click', () => {
     // 3. ストレージデータを更新
     storage.todoList = JSON.stringify(list);
 
+    updateTaskStats();
 });
